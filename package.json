@@ -1,0 +1,15 @@
+{
+  "name": "english-posts-creator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
