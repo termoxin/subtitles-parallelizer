@@ -41,41 +41,50 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
   return sections;
 };
 
-export const getSections = (settings) => {
-  const { engText, ruText, start, end } = settings;
-
-  const strippedRuText = stripTags(ruText);
-  const strippedEngText = stripTags(engText);
-
-  const first = splitOnObjectSections(strippedEngText);
-  const second = splitOnObjectSections(strippedRuText, "\n");
-
-  const hastableStartEn = keyBy(first, "startTime");
-  const hashtableEndEn = keyBy(first, "endTime");
-
-  const hastableStartRu = keyBy(second, "startTime");
-  const hashtableEndRu = keyBy(second, "endTime");
-
-  const fromEn = hastableStartEn[start].id;
-  const toEn = hashtableEndEn[end].id;
-
-  // from
-  const [h, m, s] = start.split(":");
+const createPreviousAndNextSec = (time) => {
+  const [h, m, s] = time.split(":");
 
   const previousSec = `${h}:${m}:${+s - 1}`;
   const nextSec = `${h}:${m}:${+s + 1}`;
 
-  const fromRu = (
+  return [previousSec, nextSec];
+};
+
+const splitOnSections = (text, splitter) => {
+  const strippedText = stripTags(text);
+  const sections = splitOnObjectSections(strippedText, splitter);
+
+  return sections;
+};
+
+const getHashtableByTimestamps = (text, splitter) => {
+  const sections = splitOnSections(text, splitter);
+
+  const hastableStart = keyBy(sections, "startTime");
+  const hashtableEnd = keyBy(sections, "endTime");
+
+  return [hastableStart, hashtableEnd];
+};
+
+export const getSections = (settings) => {
+  const { engText: en, ruText: ru, start, end } = settings;
+
+  const first = splitOnSections(en);
+  const second = splitOnSections(ru, "\n");
+
+  const [hastableStartEn, hashtableEndEn] = getHashtableByTimestamps(en);
+  const [hastableStartRu, hashtableEndRu] = getHashtableByTimestamps(ru, "\n");
+
+  const fromEn = hastableStartEn[start].id;
+  const toEn = hashtableEndEn[end].id;
+
+  const [previousSec, nextSec] = createPreviousAndNextSec(start);
+  const [previousSecEnd, nextSecEnd] = createPreviousAndNextSec(end);
+
+  const fromRu =
     hastableStartRu[previousSec] ||
     hastableStartRu[start] ||
-    hastableStartRu[nextSec]
-  ).id;
-
-  // to
-  const [hEnd, mEnd, sEnd] = end.split(":");
-
-  const previousSecEnd = `${hEnd}:${mEnd}:${+sEnd - 1}`;
-  const nextSecEnd = `${hEnd}:${mEnd}:${+sEnd + 1}`;
+    hastableStartRu[nextSec];
 
   const toRu = (
     hashtableEndRu[previousSecEnd] ||
