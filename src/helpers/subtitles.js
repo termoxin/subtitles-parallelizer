@@ -66,34 +66,37 @@ const getHashtableByTimestamps = (text, splitter) => {
   return [hastableStart, hashtableEnd];
 };
 
-export const getSections = (settings) => {
-  const { engText: en, ruText: ru, start, end } = settings;
+const getTranscript = (text, start, end, splitter) => {
+  const sections = splitOnSections(text, splitter);
 
-  const first = splitOnSections(en);
-  const second = splitOnSections(ru, "\n");
-
-  const [hastableStartEn, hashtableEndEn] = getHashtableByTimestamps(en);
-  const [hastableStartRu, hashtableEndRu] = getHashtableByTimestamps(ru, "\n");
-
-  const fromEn = hastableStartEn[start].id;
-  const toEn = hashtableEndEn[end].id;
+  const [hastableStart, hashtableEnd] = getHashtableByTimestamps(
+    text,
+    splitter
+  );
 
   const [previousSec, nextSec] = createPreviousAndNextSec(start);
   const [previousSecEnd, nextSecEnd] = createPreviousAndNextSec(end);
 
-  const fromRu =
-    hastableStartRu[previousSec] ||
-    hastableStartRu[start] ||
-    hastableStartRu[nextSec];
-
-  const toRu = (
-    hashtableEndRu[previousSecEnd] ||
-    hashtableEndRu[end] ||
-    hashtableEndRu[nextSecEnd]
+  const from = (
+    hastableStart[start] ||
+    hastableStart[previousSec] ||
+    hastableStart[nextSec]
   ).id;
 
-  const englishTranscript = getBetweenBy(first, fromEn, toEn, "id");
-  const russianTranscript = getBetweenBy(second, fromRu, toRu, "id");
+  const to = (
+    hashtableEnd[end] ||
+    hashtableEnd[previousSecEnd] ||
+    hashtableEnd[nextSecEnd]
+  ).id;
+
+  return getBetweenBy(sections, from, to, "id");
+};
+
+export const getSections = (settings) => {
+  const { engText: en, ruText: ru, start, end } = settings;
+
+  const englishTranscript = getTranscript(en, start, end);
+  const russianTranscript = getTranscript(ru, start, end, "\n");
 
   return [englishTranscript, russianTranscript];
 };
