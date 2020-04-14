@@ -2,20 +2,30 @@ import { stripTags } from "../helpers/string";
 import { keyBy } from "../helpers/object";
 import { getBetweenBy } from "../helpers/array";
 
-export const withoutMs = (timestamp) =>
-  timestamp.split(",")[0].replace(" ", "");
+export const withoutMs = (timestamp) => {
+  return timestamp.split(",")[0].replace(" ", "");
+};
 
 export const createObjectSection = (section) => {
   const [id, timestamp, ...content] = section.split("\n").filter(Boolean);
-  const [start, end] = timestamp.split("-->");
-  const joinedContent = content.join("\n");
 
-  return {
-    id: +id,
-    startTime: withoutMs(start),
-    endTime: withoutMs(end),
-    content: joinedContent.replace(/- /g, "").trim(),
-  };
+  if (timestamp) {
+    const [start, end] = timestamp.split("-->");
+    const joinedContent = content.join("\n");
+
+    if (start && end) {
+      return {
+        id: +id,
+        startTime: withoutMs(start),
+        endTime: withoutMs(end),
+        content: joinedContent.replace(/- /g, "").trim(),
+      };
+    }
+
+    return false;
+  }
+
+  return false;
 };
 
 export const splitOnObjectSections = (text, splitter = "\r\n") => {
@@ -30,11 +40,17 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
   let previousIndex = 0;
 
   text.split(splitter).forEach((line, index, array) => {
-    if (line === "") {
+    if (line === "" || line === "\r") {
       const section = array.slice(previousIndex, index).join("\n");
 
-      sections.push(createObjectSection(section, index));
-      previousIndex = index;
+      if (section) {
+        const createdSection = createObjectSection(section, index);
+
+        if (createdSection) {
+          sections.push(createObjectSection(section, index));
+          previousIndex = index;
+        }
+      }
     }
   });
 
@@ -44,7 +60,7 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
 const createPreviousAndNextSec = (time) => {
   const [h, m, s] = time.split(":");
 
-  const previousSec = `${h}:${m}:${+s - 1}`;
+  const previousSec = `${h}:${m}:${s - 1}`;
   const nextSec = `${h}:${m}:${+s + 1}`;
 
   return [previousSec, nextSec];
@@ -52,6 +68,7 @@ const createPreviousAndNextSec = (time) => {
 
 const splitOnSections = (text, splitter) => {
   const strippedText = stripTags(text);
+
   const sections = splitOnObjectSections(strippedText, splitter);
 
   return sections;
@@ -93,10 +110,10 @@ const getTranscript = (text, start, end, splitter) => {
 };
 
 export const getSections = (settings) => {
-  const { engText: en, ruText: ru, start, end } = settings;
+  const { firstLang, secondLang, start, end } = settings;
 
-  const englishTranscript = getTranscript(en, start, end);
-  const russianTranscript = getTranscript(ru, start, end, "\n");
+  const firstLangTranscript = getTranscript(firstLang, start, end, "\r\n");
+  const secondLangTranscript = getTranscript(secondLang, start, end, "\n");
 
-  return [englishTranscript, russianTranscript];
+  return [firstLangTranscript, secondLangTranscript];
 };
