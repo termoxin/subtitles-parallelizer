@@ -1,15 +1,26 @@
 {
   "name": "parallelizer",
+  "description": "Library to parallelize subtitles (.srt)",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
+  "author": "Rostislav Futornoy <rostislav.futornoy@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/termoxin/subtitles-parallelizer.git"
   },
+  "keywords": [
+    "tool",
+    "util",
+    "subtitles",
+    "movies",
+    "cartoons",
+    "media",
+    "srt",
+    "separator",
+    "parallelizer"
+  ],
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.3"
   }
 }
