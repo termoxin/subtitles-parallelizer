@@ -3,7 +3,7 @@ import { keyBy } from "../helpers/object";
 import { getBetweenBy } from "../helpers/array";
 
 export const withoutMs = (timestamp) => {
-  return timestamp.split(",")[0].replace(" ", "");
+  return timestamp.split(",")[0].replace(" ", "").trim();
 };
 
 export const createObjectSection = (section) => {
@@ -18,6 +18,8 @@ export const createObjectSection = (section) => {
         id: +id,
         startTime: withoutMs(start),
         endTime: withoutMs(end),
+        startTimeWithMs: start.trim(),
+        endTimeWithMs: end.trim(),
         content: joinedContent.replace(/- /g, "").trim(),
       };
     }
@@ -58,7 +60,7 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
 };
 
 export const getSectionByWord = (name, text, splitter = "\r\n") => {
-  return splitOnObjectSections(text, splitter).filter(
+  return splitOnSections(text, splitter).filter(
     (value) => value.content.indexOf(name) > -1
   );
 };
@@ -119,25 +121,25 @@ export const getSections = (settings) => {
   const {
     start,
     end,
-    firstLang,
-    secondLang,
-    firstLangSplitter = "\r\n",
-    secondLangSplitter = "\n",
+    firstLanguage,
+    secondLanguage,
+    firstLanguageSplitter = "\r\n",
+    secondLanguageSplitter = "\n",
   } = settings;
 
-  const firstLangTranscript = getTranscript(
-    firstLang,
+  const firstLanguageTranscript = getTranscript(
+    firstLanguage,
     start,
     end,
-    firstLangSplitter
+    firstLanguageSplitter
   );
 
-  const secondLangTranscript = getTranscript(
-    secondLang,
+  const secondLanguageTranscript = getTranscript(
+    secondLanguage,
     start,
     end,
-    secondLangSplitter
+    secondLanguageSplitter
   );
 
-  return [firstLangTranscript, secondLangTranscript];
+  return [firstLanguageTranscript, secondLanguageTranscript];
 };
