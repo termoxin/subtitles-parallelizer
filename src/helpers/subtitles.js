@@ -110,10 +110,28 @@ const getTranscript = (text, start, end, splitter) => {
 };
 
 export const getSections = (settings) => {
-  const { firstLang, secondLang, start, end } = settings;
+  const {
+    start,
+    end,
+    firstLang,
+    secondLang,
+    firstLangSplitter = "\r\n",
+    secondLangSplitter = "\n",
+  } = settings;
 
-  const firstLangTranscript = getTranscript(firstLang, start, end, "\r\n");
-  const secondLangTranscript = getTranscript(secondLang, start, end, "\n");
+  const firstLangTranscript = getTranscript(
+    firstLang,
+    start,
+    end,
+    firstLangSplitter
+  );
+
+  const secondLangTranscript = getTranscript(
+    secondLang,
+    start,
+    end,
+    secondLangSplitter
+  );
 
   return [firstLangTranscript, secondLangTranscript];
 };
