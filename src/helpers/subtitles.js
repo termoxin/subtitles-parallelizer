@@ -57,6 +57,12 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
   return sections;
 };
 
+export const getSectionByWord = (name, text, splitter = "\r\n") => {
+  return splitOnObjectSections(text, splitter).filter(
+    (value) => value.content.indexOf(name) > -1
+  );
+};
+
 const createPreviousAndNextSec = (time) => {
   const [h, m, s] = time.split(":");
 
