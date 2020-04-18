@@ -41,12 +41,18 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
 
   let previousIndex = 0;
 
-  text.split(splitter).forEach((line, index, array) => {
+  const textSections = text.split(splitter);
+
+  if (textSections.length === 1) {
+    return [createObjectSection(textSections[0])];
+  }
+
+  textSections.forEach((line, index, array) => {
     if (line === "" || line === "\r") {
       const section = array.slice(previousIndex, index).join("\n");
 
       if (section) {
-        const createdSection = createObjectSection(section, index);
+        const createdSection = createObjectSection(section);
 
         if (createdSection) {
           sections.push(createObjectSection(section, index));
@@ -59,13 +65,13 @@ export const splitOnObjectSections = (text, splitter = "\r\n") => {
   return sections;
 };
 
-export const getSectionByWord = (name, text, splitter = "\r\n") => {
+export const getSectionsByWord = (name, text, splitter = "\r\n") => {
   return splitOnSections(text, splitter).filter(
     (value) => value.content.indexOf(name) > -1
   );
 };
 
-const createPreviousAndNextSec = (time) => {
+export const createPreviousAndNextSec = (time) => {
   const [h, m, s] = time.split(":");
 
   const previousSec = `${h}:${m}:${s - 1}`;
