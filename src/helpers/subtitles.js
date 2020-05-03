@@ -3,7 +3,10 @@ import { keyBy } from "../helpers/object";
 import { getBetweenBy } from "../helpers/array";
 
 export const withoutMs = (timestamp) => {
-  return timestamp.split(",")[0].replace(" ", "").trim();
+  return timestamp
+    .split(",")[0]
+    .replace(" ", "")
+    .trim();
 };
 
 export const createObjectSection = (section) => {
@@ -97,7 +100,7 @@ const getHashtableByTimestamps = (text, splitter) => {
   return [hastableStart, hashtableEnd];
 };
 
-const getTranscript = (text, start, end, splitter) => {
+export const getTranscript = (text, start, end, splitter) => {
   const sections = splitOnSections(text, splitter);
 
   const [hastableStart, hashtableEnd] = getHashtableByTimestamps(
