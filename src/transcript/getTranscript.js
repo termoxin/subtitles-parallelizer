@@ -4,7 +4,7 @@ import { getHashtableByTimestamps } from "./getHashtableByTimestamps";
 import { createPreviousAndNextSec } from "../subtitles";
 
 export const getTranscript = (text, start, end, splitter) => {
-  const sections = splitOnSections(text, splitter);
+  const sections = splitOnSections(text)(splitter);
 
   const [hastableStart, hashtableEnd] = getHashtableByTimestamps(
     text,
