@@ -1,7 +1,7 @@
 {
   "name": "parallelizer",
   "description": "Library to parallelize subtitles (.srt)",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "author": "Rostislav Futornoy <rostislav.futornoy@gmail.com>",
   "scripts": {
@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.9.5",
     "@types/jest": "^25.2.1",
     "babel-jest": "^25.3.0",
-    "jest": "^25.3.0"
+    "jest": "^25.3.0",
+    "ramda": "^0.27.0"
   }
 }
