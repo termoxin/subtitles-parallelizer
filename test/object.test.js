@@ -1,4 +1,4 @@
-import { keyBy } from "../src/helpers/object";
+import { keyBy } from "../src/helpers/general/object";
 
 describe("object helpers", () => {
   test("should return object by keys", () => {

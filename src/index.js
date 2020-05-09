@@ -1,8 +1,4 @@
-export {
-  getSections,
-  getSectionsByWord,
-  getTranscript,
-} from "./helpers/subtitles";
-
-export { glueStringsBy } from "./helpers/array";
-export { srtTimeToSeconds } from "./helpers/time";
+export { getSections } from "./sections/getSections";
+export { getSectionsByWord } from "./sections/getSectionsByWord";
+export { getTranscript } from "./transcript/getTranscript";
+export { srtTimeToSeconds, secondsToSrtTime } from "./subtitles/index";

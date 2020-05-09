@@ -10,5 +10,5 @@ export const getBetweenBy = (arr, from, to, key) => {
   return sections;
 };
 
-export const glueStringsBy = (arr, key, joiner = "\n") =>
+export const joinStringsBy = (arr, key, joiner = "\n") =>
   arr.map((v) => v[key]).join(joiner);

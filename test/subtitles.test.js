@@ -1,10 +1,8 @@
-import {
-  withoutMs,
-  createObjectSection,
-  createPreviousAndNextSec,
-  getSections,
-  getSectionsByWord,
-} from "../src/helpers/subtitles";
+import { withoutMs, createPreviousAndNextSec } from "../src/subtitles";
+import { getSections } from "../src/sections/getSections";
+
+import { createObjectSection } from "../src/sections/createObjectSection";
+import { getSectionsByWord } from "../src/sections/getSectionsByWord";
 
 const firstTextSection = `2
 00:00:28,500 --> 00:00:31,461
@@ -43,9 +41,9 @@ describe("subtitle helpers", () => {
     const config = {
       start: "00:00:28",
       end: "00:00:31",
-      firstLanguage: firstTextSection,
-      secondLanguage: secondTextSection,
-      secondLanguageSplitter: "\r\n",
+      firstSubtitles: firstTextSection,
+      secondSubtitles: secondTextSection,
+      secondSubtitlesSplitter: "\r\n",
     };
 
     const result = [
@@ -61,10 +59,10 @@ describe("subtitle helpers", () => {
       ],
       [
         {
+          id: 2,
           content: "много текста",
           endTime: "00:00:31",
           endTimeWithMs: "00:00:31,461",
-          id: 2,
           startTime: "00:00:28",
           startTimeWithMs: "00:00:28,500",
         },
@@ -77,10 +75,10 @@ describe("subtitle helpers", () => {
   test("should return sections by phrase or word", () => {
     const output = [
       {
+        id: 2,
         content: "a lot of text",
         endTime: "00:00:31",
         endTimeWithMs: "00:00:31,461",
-        id: 2,
         startTime: "00:00:28",
         startTimeWithMs: "00:00:28,500",
       },
