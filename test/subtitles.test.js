@@ -1,33 +1,26 @@
-import { withoutMs, createPreviousAndNextSec } from "../src/subtitles";
-import { getSections } from "../src/sections/getSections";
+import {
+  srtTimeToSeconds,
+  secondsToSrtTime,
+  withoutMs,
+} from "../src/subtitles";
 
-import { createObjectSection } from "../src/sections/createObjectSection";
-import { getSectionsByWord } from "../src/sections/getSectionsByWord";
-
-const firstTextSection = `2
-00:00:28,500 --> 00:00:31,461
-<i>a lot of text</i>`;
-
-const secondTextSection = `2
-00:00:28,500 --> 00:00:31,461
-<i>много текста</i>`;
-
-describe("subtitle helpers", () => {
-  test("should return timestamp without milliseconds", () => {
-    expect(withoutMs("00:01:30,100")).toBe("00:01:30");
+describe("time helpers", () => {
+  test("should return seconds from string", () => {
+    expect(srtTimeToSeconds("00:01:30,000")).toBe(90);
   });
 
-  test("should return valid section object", () => {
-    const objectSection = {
-      id: 2,
-      content: "<i>a lot of text</i>",
-      endTime: "00:00:31",
-      endTimeWithMs: "00:00:31,461",
-      startTime: "00:00:28",
-      startTimeWithMs: "00:00:28,500",
-    };
+  test("should return string from secord", () => {
+    const seconds1 = srtTimeToSeconds("00:01:30,000");
+    const seconds2 = srtTimeToSeconds("00:01:30,002");
+    const seconds3 = srtTimeToSeconds("00:01:30,200");
 
-    expect(createObjectSection(firstTextSection)).toStrictEqual(objectSection);
+    expect(secondsToSrtTime(seconds1)).toBe("00:01:30,000");
+    expect(secondsToSrtTime(seconds2)).toBe("00:01:30,002");
+    expect(secondsToSrtTime(seconds3)).toBe("00:01:30,200");
+  });
+
+  test("should return timestamp without milliseconds", () => {
+    expect(withoutMs("00:01:30,100")).toBe("00:01:30");
   });
 
   test("should return next and previous second timestamp", () => {
@@ -35,55 +28,5 @@ describe("subtitle helpers", () => {
       "00:00:27",
       "00:00:29",
     ]);
-  });
-
-  test("should return section from string", () => {
-    const config = {
-      start: "00:00:28",
-      end: "00:00:31",
-      firstSubtitles: firstTextSection,
-      secondSubtitles: secondTextSection,
-      secondSubtitlesSplitter: "\r\n",
-    };
-
-    const result = [
-      [
-        {
-          content: "a lot of text",
-          endTime: "00:00:31",
-          endTimeWithMs: "00:00:31,461",
-          id: 2,
-          startTime: "00:00:28",
-          startTimeWithMs: "00:00:28,500",
-        },
-      ],
-      [
-        {
-          id: 2,
-          content: "много текста",
-          endTime: "00:00:31",
-          endTimeWithMs: "00:00:31,461",
-          startTime: "00:00:28",
-          startTimeWithMs: "00:00:28,500",
-        },
-      ],
-    ];
-
-    expect(getSections(config)).toStrictEqual(result);
-  });
-
-  test("should return sections by phrase or word", () => {
-    const output = [
-      {
-        id: 2,
-        content: "a lot of text",
-        endTime: "00:00:31",
-        endTimeWithMs: "00:00:31,461",
-        startTime: "00:00:28",
-        startTimeWithMs: "00:00:28,500",
-      },
-    ];
-
-    expect(getSectionsByWord("text", firstTextSection)).toStrictEqual(output);
   });
 });
