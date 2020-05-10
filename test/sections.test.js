@@ -1,6 +1,12 @@
 import { getSections } from "../src/sections/getSections";
 import { createObjectSection } from "../src/sections/createObjectSection";
 import { getSectionsByWord } from "../src/sections/getSectionsByWord";
+import { splitOnSections } from "../src/sections/splitOnSections";
+import {
+  subtitlesWithNewLine,
+  subtitlesWithCarriage,
+  sectionsFromSubtitles,
+} from "./fixtures/sections";
 
 const firstTextSection = `2
 00:00:28,500 --> 00:00:31,461
@@ -30,7 +36,6 @@ describe("subtitle helpers", () => {
       end: "00:00:31",
       firstSubtitles: firstTextSection,
       secondSubtitles: secondTextSection,
-      secondSubtitlesSplitter: "\r\n",
     };
 
     const result = [
@@ -74,8 +79,13 @@ describe("subtitle helpers", () => {
     expect(getSectionsByWord("text", firstTextSection)).toStrictEqual(output);
   });
 
-  test("should return sections from text", () => {
-    const input = [];
-    const output = [];
+  test("should return sections", () => {
+    expect(splitOnSections(subtitlesWithCarriage)).toEqual(
+      sectionsFromSubtitles
+    );
+
+    expect(splitOnSections(subtitlesWithNewLine)).toEqual(
+      sectionsFromSubtitles
+    );
   });
 });
