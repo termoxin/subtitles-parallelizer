@@ -3,13 +3,10 @@ import { splitOnSections } from "../sections/splitOnSections";
 import { getHashtableByTimestamps } from "./getHashtableByTimestamps";
 import { createPreviousAndNextSec } from "../subtitles";
 
-export const getTranscript = (text, start, end, splitter) => {
-  const sections = splitOnSections(text)(splitter);
+export const getTranscript = (text, start, end) => {
+  const sections = splitOnSections(text);
 
-  const [hastableStart, hashtableEnd] = getHashtableByTimestamps(
-    text,
-    splitter
-  );
+  const [hastableStart, hashtableEnd] = getHashtableByTimestamps(text);
 
   const [previousSec, nextSec] = createPreviousAndNextSec(start);
   const [previousSecEnd, nextSecEnd] = createPreviousAndNextSec(end);
