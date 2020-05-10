@@ -1,7 +1,7 @@
-import { getSections } from "../src/sections/getSections";
+import { parseBoth } from "../src/sections/parseBoth";
 import { createObjectSection } from "../src/sections/createObjectSection";
-import { getSectionsByWord } from "../src/sections/getSectionsByWord";
-import { splitOnSections } from "../src/sections/splitOnSections";
+import { parseByName } from "../src/sections/parseByName";
+import { parse } from "../src/sections/parse";
 import {
   subtitlesWithNewLine,
   subtitlesWithCarriage,
@@ -61,7 +61,7 @@ describe("subtitle helpers", () => {
       ],
     ];
 
-    expect(getSections(config)).toStrictEqual(result);
+    expect(parseBoth(config)).toStrictEqual(result);
   });
 
   test("should return sections by phrase or word", () => {
@@ -76,16 +76,12 @@ describe("subtitle helpers", () => {
       },
     ];
 
-    expect(getSectionsByWord("text", firstTextSection)).toStrictEqual(output);
+    expect(parseByName("text", firstTextSection)).toStrictEqual(output);
   });
 
   test("should return sections", () => {
-    expect(splitOnSections(subtitlesWithCarriage)).toEqual(
-      sectionsFromSubtitles
-    );
+    expect(parse(subtitlesWithCarriage)).toEqual(sectionsFromSubtitles);
 
-    expect(splitOnSections(subtitlesWithNewLine)).toEqual(
-      sectionsFromSubtitles
-    );
+    expect(parse(subtitlesWithNewLine)).toEqual(sectionsFromSubtitles);
   });
 });
