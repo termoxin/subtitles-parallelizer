@@ -1,5 +1,5 @@
 import { joinStringsBy } from "../src/helpers/general/array";
-import { arrayToJoin, arrayToJoinResult } from "./fixtures/string";
+import { arrayToJoin, arrayToJoinResult } from "./fixtures/array";
 
 describe("string helpers", () => {
   test("should return joined string", () => {

@@ -2,6 +2,7 @@ import {
   srtTimeToSeconds,
   secondsToSrtTime,
   withoutMs,
+  createPreviousAndNextSec,
 } from "../src/subtitles";
 
 describe("time helpers", () => {
