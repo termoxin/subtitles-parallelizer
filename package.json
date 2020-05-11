@@ -16,12 +16,13 @@
     "tool",
     "util",
     "subtitles",
-    "movies",
-    "cartoons",
     "media",
     "srt",
-    "separator",
-    "parallelizer"
+    "parallelizer",
+    "parser",
+    "text",
+    "subtitles-parser",
+    "converter"
   ],
   "license": "MIT",
   "dependencies": {

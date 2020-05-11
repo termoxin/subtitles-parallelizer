@@ -1,15 +1,22 @@
 import { getBetweenBy } from "../helpers/general/array";
-import { splitOnSections } from "../sections/splitOnSections";
+import { splitOnSections } from "./parse";
 import { getHashtableByTimestamps } from "./getHashtableByTimestamps";
 import { createPreviousAndNextSec } from "../subtitles";
 
-export const getTranscript = (text, start, end, splitter) => {
-  const sections = splitOnSections(text)(splitter);
+/**
+ * The function takes text, start and end time to get sections between specific timestamps
+ *
+ * @param text The text to parse
+ * @param start The start timestamp
+ * @param end The end timestamp
+ *
+ * @returns the same array of objects as like ``parse`` function does
+ */
 
-  const [hastableStart, hashtableEnd] = getHashtableByTimestamps(
-    text,
-    splitter
-  );
+export const parseByTimestamp = (text, start, end) => {
+  const sections = splitOnSections(text);
+
+  const [hastableStart, hashtableEnd] = getHashtableByTimestamps(text);
 
   const [previousSec, nextSec] = createPreviousAndNextSec(start);
   const [previousSecEnd, nextSecEnd] = createPreviousAndNextSec(end);

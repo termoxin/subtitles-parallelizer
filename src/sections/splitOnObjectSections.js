@@ -1,7 +1,6 @@
 import { createObjectSection } from "./createObjectSection";
-import { curryN } from "ramda";
 
-export const splitOnObjectSections = curryN(2, (text, splitter = "\r\n") => {
+export const splitOnObjectSections = (text, splitter = "\n") => {
   if (!text) {
     throw new Error(
       "Please, provide the first argument (subtitles to split on sections)"
@@ -32,5 +31,9 @@ export const splitOnObjectSections = curryN(2, (text, splitter = "\r\n") => {
     }
   });
 
+  if (sections.length <= 1) {
+    return splitOnObjectSections(text, "\r\n");
+  }
+
   return sections;
-});
+};
