@@ -1,5 +1,5 @@
-import { compose } from "ramda";
 import { stripTags } from "../helpers/general/string";
+import { compose } from "../helpers/general/fp";
 import { splitOnObjectSections } from "./splitOnObjectSections";
 
 /**
