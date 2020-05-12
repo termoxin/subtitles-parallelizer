@@ -2,7 +2,7 @@
   "name": "parallelizer",
   "description": "Library to parallelize subtitles (.srt)",
   "version": "1.0.8",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Rostislav Futornoy <rostislav.futornoy@gmail.com>",
   "scripts": {
     "test": "jest",
@@ -12,9 +12,13 @@
     "type": "git",
     "url": "https://github.com/termoxin/subtitles-parallelizer.git"
   },
+  "engines": {
+    "node": ">=14.2"
+  },
   "keywords": [
     "tool",
     "util",
+    "subtitle",
     "subtitles",
     "media",
     "srt",
@@ -25,15 +29,12 @@
     "converter"
   ],
   "license": "MIT",
-  "dependencies": {
-    "esm": "^3.2.25",
-    "ramda": "^0.27.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@types/jest": "^25.2.1",
     "babel-jest": "^25.3.0",
     "jest": "^25.3.0"
-  }
+  },
+  "type": "module"
 }
