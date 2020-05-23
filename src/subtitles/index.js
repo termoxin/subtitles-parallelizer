@@ -4,7 +4,7 @@ const millisecondsToSeconds = (ms) => ms / 1000;
 
 /**
  * The function takes time in srt format (such as 00:01:00,200) and returns seconds
- * @param time - srt time to convert in seconds
+ * @param time srt time to convert in seconds
  *
  * @example
  * ```js
@@ -28,8 +28,8 @@ export const srtTimeToSeconds = (time) => {
 
 /**
  * The function is the opposite of the srtTimeToSeconds function
- * it takes time in seconds and return a string in srt time format
- * @param seconds - convert seconds into srt time format
+ * it takes time in seconds and returns a string in srt time format
+ * @param seconds convert seconds into srt time format
  *
  * @example
  * ```js
