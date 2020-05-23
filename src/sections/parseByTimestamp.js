@@ -4,13 +4,13 @@ import { getHashtableByTimestamps } from "./getHashtableByTimestamps";
 import { createPreviousAndNextSec } from "../subtitles";
 
 /**
- * The function takes text, start and end time to get sections between specific timestamps
+ * The function takes subtitles text, start and end time to get sections between specific timestamps
  *
  * @param text The text to parse
  * @param start The start timestamp
  * @param end The end timestamp
  *
- * @returns the same array of objects as like ``parse`` function does
+ * @returns the same array of objects as ``parse`` function does
  */
 
 export const parseByTimestamp = (text, start, end) => {

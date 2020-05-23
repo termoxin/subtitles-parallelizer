@@ -3,8 +3,8 @@ import { secondsToSrtTime, srtTimeToSeconds, withoutMs } from "./index";
 /**
  * The function resynchonizes subtitles
  *
- * @param subtitles - array of objects that ``parse`` function produces
- * @param time - offset time (you can use negative value for flexibity)
+ * @param subtitles array of objects that ``parse`` function produces
+ * @param time offset time (you can use negative value for flexibity)
  *
  * @example
  * ```js
