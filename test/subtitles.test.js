@@ -9,9 +9,10 @@ import {
   srtTimeToSeconds,
   secondsToSrtTime,
   withoutMs,
-  resync,
   createPreviousAndNextSec,
 } from "../src/subtitles";
+
+import { resync } from "../src/subtitles/resync";
 
 describe("time helpers", () => {
   test("should return seconds from string", () => {
