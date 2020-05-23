@@ -3,7 +3,7 @@ import { compose } from "../helpers/general/fp";
 import { splitOnObjectSections } from "./splitOnObjectSections";
 
 /**
- * The function takes subtitles in srt format and returns sections as array of objects
+ * The function takes subtitles text in srt format and returns sections as array of objects
  * @param text - subtitles text to parse into array of objects
  *
  * @example
