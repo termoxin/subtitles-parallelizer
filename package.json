@@ -1,7 +1,7 @@
 {
   "name": "parallelizer",
   "description": "Library to parallelize subtitles (.srt)",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "main": "src/index.js",
   "author": "Rostislav Futornoy <rostislav.futornoy@gmail.com>",
   "scripts": {
