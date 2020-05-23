@@ -70,24 +70,24 @@ There we go, this is how our sections data array looks like
 
 <dl>
 <dt><a href="#parse">parse</a></dt>
-<dd><p>The function takes subtitles in srt format and returns sections as array of objects</p>
+<dd><p>The function takes subtitles text in srt format and returns sections as an array of objects</p>
 </dd>
 <dt><a href="#parseBoth">parseBoth</a> </dt>
-<dd><p>The function takes settings and return two parallelized subtitles
+<dd><p>The function takes settings and returns two parallelized subtitles
 (for instance, to parallelize two different subtitles in different languages)</p>
 </dd>
 <dt><a href="#parseByName">parseByName</a> </dt>
-<dd><p>The function takes name and text to find a word or a phrase in each section&#39;s content of the subtitles</p>
+<dd><p>The function takes name and subtitles text to find a word or a phrase in each section&#39;s content of the subtitles</p>
 </dd>
 <dt><a href="#parseByTimestamp">parseByTimestamp</a> </dt>
-<dd><p>The function takes text, start and end time to get sections between specific timestamps</p>
+<dd><p>The function takes subtitles text, start and end time to get sections between specific timestamps</p>
 </dd>
 <dt><a href="#srtTimeToSeconds">srtTimeToSeconds</a></dt>
 <dd><p>The function takes time in srt format (such as 00:01:00,200) and returns seconds</p>
 </dd>
 <dt><a href="#secondsToSrtTime">secondsToSrtTime</a></dt>
 <dd><p>The function is the opposite of the srtTimeToSeconds function
-it takes time in seconds and return a string in srt time format</p>
+it takes time in seconds and returns a string in srt time format</p>
 </dd>
 <dt><a href="#resync">resync</a></dt>
 <dd><p>The function resynchonizes subtitles</p>
@@ -98,7 +98,7 @@ it takes time in seconds and return a string in srt time format</p>
 
 ## parse
 
-The function takes subtitles text in srt format and returns sections as array of objects
+The function takes subtitles text in srt format and returns sections as an array of objects
 
 | Param | Description                                   |
 | ----- | --------------------------------------------- |
@@ -132,7 +132,7 @@ The function takes subtitles text in srt format and returns sections as array of
 
 ## parseBoth
 
-The function takes settings and return two parallelized subtitles
+The function takes settings and returns two parallelized subtitles
 (for instance, to parallelize two different subtitles in different languages)
 
 **Returns**: the tuple (array with two items), where items are the data structures of the same output
@@ -140,9 +140,9 @@ as the `parse` function returns
 
 | Param                    | Description                               |
 | ------------------------ | ----------------------------------------- |
-| settings                 | Settings to parallelize two subtitles.    |
-| settings.start           | The start time in the each subttles file. |
-| settings.end             | The end time in the each subtitles file.  |
+| settings                 | Settings to parallelize two subtitles     |
+| settings.start           | The start time in the each subtitles file |
+| settings.end             | The end time in the each subtitles file   |
 | settings.firstSubtitles  | The first subtitles text                  |
 | settings.secondSubtitles | The second subtitles text                 |
 
@@ -150,22 +150,22 @@ as the `parse` function returns
 
 ## parseByName
 
-The function takes name and text to find a word or a phrase in each section's content of the subtitles
+The function takes name and subtitles text to find a word or a phrase in each section's content of the subtitles
 
 **Returns**: the same array of objects as like `parse` function does
 
-| Param | Description               |
-| ----- | ------------------------- |
-| name  | A word or phrase to find. |
-| text  | The text to parse         |
+| Param | Description              |
+| ----- | ------------------------ |
+| name  | A word or phrase to find |
+| text  | The text to parse        |
 
 <a name="parseByTimestamp"></a>
 
 ## parseByTimestamp
 
-The function takes text, start and end time to get sections between specific timestamps
+The function takes subtitles text, start and end time to get sections between specific timestamps
 
-**Returns**: the same array of objects as like `parse` function does
+**Returns**: the same array of objects as `parse` function does
 
 | Param | Description         |
 | ----- | ------------------- |
@@ -194,7 +194,7 @@ srtTimeToSecond("00:01:30,000"); // 90
 ## secondsToSrtTime
 
 The function is the opposite of the srtTimeToSeconds function
-it takes time in seconds and return a string in srt time format
+it takes time in seconds and returns a string in srt time format
 
 | Param   | Description                          |
 | ------- | ------------------------------------ |
