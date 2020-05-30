@@ -1,4 +1,4 @@
-import { parse } from "./parse";
+import { parseByTimestamp } from "./parseByTimestamp";
 
 /**
  * The function takes settings and returns two parallelized subtitles
@@ -17,8 +17,13 @@ import { parse } from "./parse";
 export const parseBoth = (settings) => {
   const { start, end, firstSubtitles, secondSubtitles } = settings;
 
-  const firstSubtitlesTranscript = parse(firstSubtitles, start, end);
-  const secondSubtitlesTranscript = parse(secondSubtitles, start, end);
+  const firstSubtitlesTranscript = parseByTimestamp(firstSubtitles, start, end);
+
+  const secondSubtitlesTranscript = parseByTimestamp(
+    secondSubtitles,
+    start,
+    end
+  );
 
   return [firstSubtitlesTranscript, secondSubtitlesTranscript];
 };
