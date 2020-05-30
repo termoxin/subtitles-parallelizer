@@ -1,8 +1,8 @@
 import { keyBy } from "../helpers/general/object";
-import { splitOnSections } from "./parse";
+import { parse } from "./parse";
 
 export const getHashtableByTimestamps = (text) => {
-  const sections = splitOnSections(text);
+  const sections = parse(text);
 
   const hastableStart = keyBy(sections, "startTime");
   const hashtableEnd = keyBy(sections, "endTime");

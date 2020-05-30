@@ -1,5 +1,5 @@
 import { getBetweenBy } from "../helpers/general/array";
-import { splitOnSections } from "./parse";
+import { parse } from "./parse";
 import { getHashtableByTimestamps } from "./getHashtableByTimestamps";
 import { createPreviousAndNextSec } from "../subtitles";
 
@@ -14,7 +14,7 @@ import { createPreviousAndNextSec } from "../subtitles";
  */
 
 export const parseByTimestamp = (text, start, end) => {
-  const sections = splitOnSections(text);
+  const sections = parse(text);
 
   const [hastableStart, hashtableEnd] = getHashtableByTimestamps(text);
 
