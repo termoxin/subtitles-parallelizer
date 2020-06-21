@@ -10,4 +10,4 @@ import { parse } from "./parse";
  */
 
 export const parseByName = (name, text) =>
-  parse(text).filter((value) => value.content.indexOf(name) > -1);
+  parse(text).filter((value) => new RegExp(name, "gi").test(value.content));
