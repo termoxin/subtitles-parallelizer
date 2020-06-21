@@ -64,7 +64,7 @@ describe("subtitle helpers", () => {
     expect(parseBoth(config)).toStrictEqual(result);
   });
 
-  test("should return sections by phrase or word", () => {
+  test("should return sections by phrase or word and shouldn't be letter case sensitive", () => {
     const output = [
       {
         id: 2,
@@ -77,6 +77,7 @@ describe("subtitle helpers", () => {
     ];
 
     expect(parseByName("text", firstTextSection)).toStrictEqual(output);
+    expect(parseByName("Text", firstTextSection)).toStrictEqual(output);
   });
 
   test("should return sections", () => {
