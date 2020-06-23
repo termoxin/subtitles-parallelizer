@@ -6,6 +6,7 @@ import {
   subtitlesWithNewLine,
   subtitlesWithCarriage,
   sectionsFromSubtitles,
+  subtitlesForOffset,
 } from "./fixtures/sections";
 
 const firstTextSection = `2
@@ -78,6 +79,47 @@ describe("subtitle helpers", () => {
 
     expect(parseByName("text", firstTextSection)).toStrictEqual(output);
     expect(parseByName("Text", firstTextSection)).toStrictEqual(output);
+    expect(parseByName("Text", firstTextSection)).toHaveLength(1);
+  });
+
+  test("should return sections by phrase or word with offset", () => {
+    const output = [
+      {
+        id: 1,
+        startTime: "00:00:01",
+        endTime: "00:00:05",
+        startTimeWithMs: "00:00:01,000",
+        endTimeWithMs: "00:00:05,000",
+        content:
+          "She saw no irony asking me to change  but wanting me to accept her for who she is.\n" +
+          "Subtitle 1.2",
+      },
+      {
+        id: 2,
+        startTime: "00:00:30",
+        endTime: "00:35:00",
+        startTimeWithMs: "00:00:30,500",
+        endTimeWithMs: "00:35:00,000",
+        content:
+          "Each person who knows you has a\n" +
+          "different perception of who you are\n" +
+          "Subtitle 1.2",
+      },
+      {
+        id: 3,
+        startTime: "00:36:00",
+        endTime: "00:40:05",
+        startTimeWithMs: "00:36:00,000",
+        endTimeWithMs: "00:40:05,000",
+        content:
+          "She had some amazing news to share but nobody to share it with.\n" +
+          "Subtitle 1.2",
+      },
+    ];
+
+    expect(
+      parseByName("Each person", subtitlesForOffset, { left: 1, right: 1 })
+    ).toEqual(output);
   });
 
   test("should return sections", () => {
