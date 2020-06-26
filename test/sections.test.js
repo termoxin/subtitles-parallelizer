@@ -118,7 +118,7 @@ describe("subtitle helpers", () => {
     ];
 
     expect(
-      parseByName("Each person", subtitlesForOffset, { left: 1, right: 1 })
+      parseByName("PERCEPTION", subtitlesForOffset, { left: 1, right: 1 })
     ).toEqual(output);
   });
 
