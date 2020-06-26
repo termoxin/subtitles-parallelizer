@@ -151,13 +151,15 @@ as the `parse` function returns
 ## parseByName
 
 The function takes name and subtitles text to find a word or a phrase in each section's content of the subtitles
+The function takes a third argument as offset object to widen array of objects left or right or both
 
-**Returns**: the same array of objects as like `parse` function does
+**Returns**: array of objects (sections) like `parse` function does
 
-| Param | Description              |
-| ----- | ------------------------ |
-| name  | A word or phrase to find |
-| text  | The text to parse        |
+| Param  | Type                | Description                 |
+| ------ | ------------------- | --------------------------- |
+| name   |                     | A word or phrase to find    |
+| text   |                     | The text to parse           |
+| offset | <code>Object</code> | Offset configuration object |
 
 <a name="parseByTimestamp"></a>
 
