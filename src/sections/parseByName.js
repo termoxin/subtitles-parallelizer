@@ -12,7 +12,7 @@ import { getBetweenBy } from "../helpers/general/array";
  * @returns array of objects (sections) like ``parse`` function does
  */
 
-export const parseByName = (name, text, offset) => {
+export const parseByName = (name, text, offset = { left: 0, right: 0 }) => {
   if (offset) {
     const parsedSubtitles = parse(text);
 
