@@ -26,13 +26,13 @@ export const formatSection = (text) => {
       lastChar === lastChar.toLowerCase() &&
       isLetter(lastChar)
     ) {
-      newLines.push(line + " " + nextLine.trim());
+      newLines.push(line + " " + nextLine?.trim() || "");
       i++;
     } else if (
       (nextLine && lastChar && shallowEqual(lastChar, COMMA)) ||
       isNumberOrLetter(lastChar)
     ) {
-      newLines.push(line + " " + nextLine.trim());
+      newLines.push(line + " " + nextLine?.trim() || "");
       i++;
     } else {
       newLines.push(line);
